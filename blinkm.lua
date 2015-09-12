@@ -1,0 +1,10 @@
+return function (r, g, b)
+    r = math.min(255, r or 0)
+    g = math.min(255, g or 0)
+    b = math.min(255, b or 0)
+    i2c.start(0)
+    i2c.address(0, 0x09, i2c.TRANSMITTER)
+    i2c.write(0, 0x6f)
+    i2c.write(0, 'c', r, g, b)
+    i2c.stop(0)
+end

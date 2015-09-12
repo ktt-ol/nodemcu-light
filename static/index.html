@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+</head>
+<body>
+
+<style type="text/css">
+
+html {
+    font-size: 10px;
+    background: black;
+    width: 100%;
+}
+
+div.button {
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    margin: 1rem;
+    width: 15rem;
+    float: left;
+    height: 15rem;
+    background: red;
+}
+
+</style>
+
+<div>
+    <div class="button" style="background-color: #000;"></div>
+    <div class="button" style="background-color: #f00;"></div>
+    <div class="button" style="background-color: #00f;"></div>
+    <div class="button" style="background-color: #0f0;"></div>
+    <div class="button" style="background-color: #ff0;"></div>
+    <div class="button" style="background-color: #fff;"></div>
+    <div class="button" style="background-color: #fee;"></div>
+    <div class="button" style="background-color: #555;"></div>
+    <div class="button" style="background-color: #0ff;"></div>
+    <div class="button" style="background-color: #f0f;"></div>
+</div>
+
+<script type="text/javascript" src="/static/zepto-touch.js.gz"></script>
+<!-- <script type="text/javascript" src="zepto-touch.js"></script> -->
+<script type="text/javascript">
+
+// var server = 'http://192.168.2.220';
+var server = '';
+
+function parseColor(rgb) {
+    console.log(rgb);
+    var m = rgb.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+    if(m) {
+        return {'r': m[1], 'g': m[2], 'b': m[3]};
+    }
+}
+
+$('.button').on("tap click", function(evt){
+    var b = $(this);
+    var c = b.css('background-color');
+    var rgb = parseColor(c);
+    $.get(server + '/rgb', rgb, function(response){}, 'jsonp');
+    // $('html').css('background-color', c);
+    // window.setTimeout(function() {
+    //     $('html').css('background-color', 'black');
+    // }, 10);
+})
+</script>
+</body>
+</html>

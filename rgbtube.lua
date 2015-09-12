@@ -1,0 +1,11 @@
+return function(r, g, b, w)
+    r = math.floor(math.min(255, r or 0)/4)
+    g = math.floor(math.min(255, g or 0)/4)
+    b = math.floor(math.min(255, b or 0)/4)
+    w = math.floor(math.min(255, w or 0)/4)
+    print(r, g, b, w)
+    i2c.start(0)
+    i2c.address(0, 0x27, i2c.TRANSMITTER)
+    i2c.write(0, 0x00, w, b, g, r, w, b, g, r)
+    i2c.stop(0)
+end
